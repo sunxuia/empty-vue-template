@@ -1,17 +1,21 @@
+const isProduction = process.env.NODE_ENV === 'production'
+
 module.exports = {
   root: true,
   env: {
-    node: true
+    browser: true
   },
-  'extends': [
+  parserOptions: {
+    parser: 'babel-eslint'
+  },
+  extends: [
     'plugin:vue/essential',
     '@vue/standard'
   ],
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
-  },
-  parserOptions: {
-    parser: 'babel-eslint'
+    'space-before-function-paren': 'off',
+    'no-console': isProduction ? 'error' : 'off',
+    'no-debugger': isProduction ? 'error' : 'off',
+    'generator-star-spacing': 'off'
   }
 }

@@ -5,8 +5,26 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
+    "lint": "vue-cli-service lint && stylelint src/**/*.{css,scss,sass,vue} --fix",
     "test:unit": "vue-cli-service test:unit"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "vue-cli-service lint",
+      "git add"
+    ],
+    "*.vue": [
+      "vue-cli-service lint",
+      "stylelint --fix",
+      "git add"
+    ],
+    "*.{css,scss,sass}": [
+      "stylelint --fix",
+      "git add"
+    ]
   },
   "dependencies": {
     "vue": "^2.5.17",
@@ -27,20 +45,11 @@
     "eslint-plugin-vue": "^5.0.0-0",
     "lint-staged": "^7.2.2",
     "node-sass": "^4.9.0",
+    "postcss-preset-env": "^6.4.0",
     "sass-loader": "^7.0.1",
+    "stylelint": "^9.9.0",
+    "stylelint-config-recommended": "^2.1.0",
+    "stylelint-webpack-plugin": "^0.10.5",
     "vue-template-compiler": "^2.5.17"
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.js": [
-      "vue-cli-service lint",
-      "git add"
-    ],
-    "*.vue": [
-      "vue-cli-service lint",
-      "git add"
-    ]
   }
 }
